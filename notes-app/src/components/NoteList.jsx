@@ -3,8 +3,9 @@ import { NoteItem } from "./NoteItem";
 import { useSelector } from "react-redux";
 
 export const NoteList = () => {
-  const notes = useSelector((state) => state.notesReducer.notes);
+  const notes = useSelector((state) => state.notesReducer.filteredNotes);
   const [query, setQuery] = useState("");
+
   const sortedArray = [...notes].sort((a, b) => {
     if (query === "id-ascend") {
       return a.id - b.id;
@@ -18,7 +19,6 @@ export const NoteList = () => {
       return b.id - a.id;
     }
   });
-
   return (
     <>
       <form className="form mt-3">
@@ -43,6 +43,7 @@ export const NoteList = () => {
           <option value="title-descend">Title (Z-A)</option>
         </select>
       </form>
+
       <table className="table table-striped table-bordered mt-2">
         <thead>
           <tr className="table-dark">
@@ -50,16 +51,12 @@ export const NoteList = () => {
             <th>TITLE</th>
             <th>BODY</th>
             <th>DELETE</th>
+            <th>UPDATE</th>
           </tr>
         </thead>
         <tbody>
           {sortedArray.map((note, index) => (
-            <NoteItem
-              key={index}
-              id={note.id}
-              title={note.title}
-              body={note.body}
-            />
+            <NoteItem key={index} note={note} />
           ))}
         </tbody>
       </table>
