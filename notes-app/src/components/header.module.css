@@ -10,10 +10,5 @@
   box-shadow: 1px 4px 6px rgba(0, 0, 0, 0.1);
   position: fixed;
   top: 0px;
-  left: 0px;
   width: 100%;
-  z-index: 1000;
 }
-/* .is{
-  background-color:purple;
-}  */
